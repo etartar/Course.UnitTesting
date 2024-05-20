@@ -2,6 +2,7 @@
 using FluentValidation.Results;
 using System.Diagnostics;
 using Users.Api.DTOs;
+using Users.Api.Logging;
 using Users.Api.Models;
 using Users.Api.Repositories;
 
@@ -10,9 +11,9 @@ namespace Users.Api.Services;
 public sealed class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
-    private readonly ILogger<User> _logger;
+    private readonly ILoggerAdapter<UserService> _logger;
 
-    public UserService(IUserRepository userRepository, ILogger<User> logger)
+    public UserService(IUserRepository userRepository, ILoggerAdapter<UserService> logger)
     {
         _userRepository = userRepository;
         _logger = logger;
