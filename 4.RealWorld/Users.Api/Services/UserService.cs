@@ -81,11 +81,7 @@ public sealed class UserService : IUserService
             throw new ArgumentException("Name already exist");
         }
 
-        User user = new User()
-        {
-            Id = Guid.NewGuid(),
-            FullName = request.FullName
-        };
+        User user = CreateUserDtoToUserObject(request);
 
         _logger.LogInformation("Creating user with id {0} and name: {1}", user.Id, user.FullName);
 
@@ -134,5 +130,16 @@ public sealed class UserService : IUserService
             stopWatch.Stop();
             _logger.LogInformation("User with id: {0} deleted in {1}ms", user.Id, stopWatch.ElapsedMilliseconds);
         }
+    }
+
+    public User CreateUserDtoToUserObject(CreateUserDto request)
+    {
+        User user = new User()
+        {
+            Id = Guid.NewGuid(),
+            FullName = request.FullName
+        };
+
+        return user;
     }
 }
